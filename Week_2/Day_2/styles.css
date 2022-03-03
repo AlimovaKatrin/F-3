@@ -1,0 +1,26 @@
+.card{
+    width: 400px;
+    height: 400px;
+    background-color: lemonchiffon;
+    display: flex;
+    flex-wrap: wrap;
+    border: 20px solid orange;
+    border-radius: 10px;
+}
+
+.image > img{
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+    border: 20px solid grey;
+    border-radius: 10px;
+}
+
+.properties{
+    width: 180px;
+    margin: 10px;
+}
+
+.description{
+    margin: 10px;
+}
