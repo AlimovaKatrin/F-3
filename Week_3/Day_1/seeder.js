@@ -18,7 +18,7 @@
 // 2) cloneNode чтобы создать "шаблон"
 // 3) наполнить шаблон корректными данными
 // 4) добавть новую карточку на страницу
-
+document.querySelectorAll
 import bar,{ Pokemon } from './classes.js';
 // mock pockemons
 const kiwi = new Pokemon('Kiwi', ['jump on tree'], null, null);
