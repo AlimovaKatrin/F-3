@@ -42,6 +42,16 @@ export const getPokemonByNameOrId = async (params) => {
         const pokemon = new Pokemon(name, serailizedAbilities, experience, image);
         return pokemon;
     } catch (error) {
-        throw Error('Покемон не найден')
+        throw Error('Покемон не найден');
     }
+};
+
+export const writeLS = (key, value) => {
+    const prevList = JSON.parse(localStorage.getItem(key));
+    const updList = prevList ? [...prevList, value] : [value];
+    localStorage.setItem(key, JSON.stringify(updList));
+};
+
+export const readLS = (key) => {
+    return JSON.parse(localStorage.getItem(key));
 };

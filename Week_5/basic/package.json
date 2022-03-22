@@ -1,0 +1,20 @@
+{
+  "name": "w5_d1",
+  "version": "1.0.0",
+  "description": "study project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "npm"
+  ],
+  "author": "SUPER GROUP",
+  "license": "ISC",
+  "dependencies": {
+    "table": "^6.8.0"
+  }
+}

@@ -1,12 +1,16 @@
-import { fillPokemonCard, getPokemonByNameOrId } from './const.js';
+import { fillPokemonCard, getPokemonByNameOrId, readLS, writeLS } from './const.js';
 
 const btn = document.querySelector('#add');
+
+const previousPokemons = readLS('pokemons');
+previousPokemons?.length && previousPokemons.forEach((el) => fillPokemonCard(el))
 
 btn.addEventListener('click', async (event) => {
     const randomId = Math.floor(Math.random() * 100);
     try {
         const pokemon = await getPokemonByNameOrId(randomId);
         fillPokemonCard(pokemon);
+        writeLS('pokemons' ,pokemon )
     } catch (error) {
         alert(error.message);
     }
