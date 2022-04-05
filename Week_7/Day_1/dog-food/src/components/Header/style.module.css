@@ -1,0 +1,14 @@
+.mainContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.logoContainer {
+}
+
+.searchContainer {
+}
+
+.restButtonsContainer {
+}
