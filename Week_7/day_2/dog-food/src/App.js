@@ -31,7 +31,7 @@ export const App = () => {
     useEffect(() => {
         api.getProducts()
             .then((res) => res.json())
-            .then((data) => setFoodList(data))
+            .then(({ products }) => setFoodList(products))
             .catch((err) => err.message);
     }, []);
 
