@@ -8,13 +8,13 @@ export const CreateItem = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const {
-            target: { name, description, price },
+            target: { inputName, inputDescription, inputPrice },
         } = event;
         // name.value === event.target.name.value
         api.addProduct({
-            name: name.value, // name(ключ объекта) : name.value(обращение к value input из узла дома event target)
-            description: description.value,
-            price: price.value,
+            name: inputName.value, // name(ключ объекта) : name.value(обращение к value input из узла дома event target)
+            description: inputDescription.value,
+            price: inputPrice.value,
         })
             .then((data) => {
                 navigate('/');
@@ -24,9 +24,9 @@ export const CreateItem = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input name='name' placeholder='name' />
-            <input name='description' placeholder='description' />
-            <input name='price' placeholder='price' />
+            <input name='inputName' placeholder='name' />
+            <input name='inputDescription' placeholder='description' />
+            <input name='inputPrice' placeholder='price' />
             <button>Добавить товар</button>
         </form>
     );
