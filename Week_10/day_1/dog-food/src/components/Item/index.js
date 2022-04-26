@@ -2,19 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
 
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+
 import Grid from '@mui/material/Grid';
 import { Button, IconButton, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-export const Item = () => {
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
+export const Item = ({ changeList }) => {
     const [item, setItem] = useState(null);
     const params = useParams();
     const navigate = useNavigate();
+    const { writeLS } = useLocalStorage();
 
     const handleClick = () => {
         api.deleteProduct(params.itemID)
             .then((data) => {
-                console.log(data);
+                changeList((prevState) => {
+                    return prevState.filter((item) => item._id !== params.itemID);
+                });
                 navigate('/');
             })
             .catch((err) => alert(err));
@@ -22,6 +29,10 @@ export const Item = () => {
 
     const navigateToEditPage = () => {
         navigate(`edit`);
+    };
+
+    const addToFavorite = () => {
+        writeLS('favorites', params.itemID);
     };
 
     useEffect(() => {
@@ -53,6 +64,9 @@ export const Item = () => {
                             </IconButton>
                             <IconButton onClick={navigateToEditPage}>
                                 <EditIcon />
+                            </IconButton>
+                            <IconButton onClick={addToFavorite}>
+                                <FavoriteIcon />
                             </IconButton>
                         </Grid>
                     </Grid>

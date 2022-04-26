@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import api from '../../utils/api';
 import './index.css';
 
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+
 import { Grid, Card as CardMUI } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -15,17 +17,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 export const Card = ({ itemFood, isInBasket, setBasket, isInFavorites, setFavorites }) => {
-    const writeLS = (key, value) => {
-        const storage = JSON.parse(localStorage.getItem(key)) || [];
-        storage.push(value);
-        localStorage.setItem(key, JSON.stringify(storage));
-    };
-
-    const removeLS = (key, value) => {
-        const storage = JSON.parse(localStorage.getItem(key));
-        const filteredStorage = storage.filter((itemID) => value !== itemID);
-        localStorage.setItem(key, JSON.stringify(filteredStorage));
-    };
+    const { writeLS, removeLS } = useLocalStorage();
 
     const addItem = () => {
         writeLS('basket', itemFood._id);

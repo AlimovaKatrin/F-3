@@ -5,7 +5,7 @@ import api from '../../utils/api';
 
 import { TextField, Grid, Button, Typography } from '@mui/material';
 
-export const CreateItem = () => {
+export const CreateItem = ({ changeList }) => {
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -19,6 +19,7 @@ export const CreateItem = () => {
             price: inputPrice.value,
         })
             .then((data) => {
+                changeList((prevState) => [data, ...prevState])
                 navigate('/');
             })
             .catch((err) => alert(err));
