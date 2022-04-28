@@ -1,0 +1,50 @@
+@import '../node_modules/normalize.css/normalize.css';
+
+* {
+    box-sizing: inherit;
+}
+html {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Nunito', 'Arial', 'Helvetica', sans-serif;
+}
+
+.appContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.container {
+    max-width: 1024px;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 95%;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+.content {
+    padding: 20px 0;
+}
+
+.content__sort {
+    margin-bottom: 40px;
+}
+
+.result {
+    font-size: 24px;
+}
+
+.info{
+	display: flex;
+	flex-direction: column;
+	font-size: 18px;
+	align-items: flex-end;
+}
