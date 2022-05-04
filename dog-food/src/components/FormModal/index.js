@@ -43,24 +43,32 @@ export const FormModal = () => {
         setPassword(target.value);
     };
 
+    const onSignIn = (signedInUser) => {
+        const { token, data } = signedInUser;
+        localStorage.setItem('token', JSON.stringify(token));
+        setUser(data);
+        setModalFormState(() => {
+            return {
+                isOpen: false,
+                msg: null,
+            };
+        });
+    };
+
+
     const signUp = () => {
         api.signUp({ email, password })
             .then((createdUser) => {
                 console.log({ createdUser });
                 return api.signIn({ email, password });
             })
-            .then((signedInUser) => {
-                const { token, data } = signedInUser;
-                localStorage.setItem('token', JSON.stringify(token));
-                setUser(data);
-                setModalFormState(() => {
-                    return {
-                        isOpen: false,
-                        msg: null,
-                    };
-                });
-            });
+            .then(onSignIn)
     };
+
+    const signIn = () => {
+        api.signIn({ email, password })
+            .then(onSignIn)
+    }
 
     return (
         <Modal open={modalFormState.isOpen} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
@@ -91,7 +99,7 @@ export const FormModal = () => {
                         </Button>
                     </Grid>
                     <Grid item xs={6}>
-                        <Button fullWidth variant='contained' color='primary' size='small'>
+                        <Button fullWidth variant='contained' color='primary' size='small' onClick={signIn}>
                             Логин
                         </Button>
                     </Grid>

@@ -8,9 +8,11 @@ import AddIcon from '@mui/icons-material/Add';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FaceIcon from '@mui/icons-material/Face';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 export const Info = ({ basket, favorites }) => {
     const navigate = useNavigate();
+
     const { user } = useContext(UserContext);
 
     const navigateToCreatePage = () => {
@@ -19,6 +21,11 @@ export const Info = ({ basket, favorites }) => {
 
     const navigateToEditPage = () => {
         navigate('user/edit');
+    };
+
+    const signOut = () => {
+        localStorage.setItem('token', '');
+        navigate(0);
     };
 
     return (
@@ -37,8 +44,13 @@ export const Info = ({ basket, favorites }) => {
                         <Chip icon={<DeleteIcon />} label={basket.length} color='info' variant='outlined' />
                     </Grid>
                 </Grid>
-                <Grid item container>
-                    <Chip icon={<FaceIcon />} onClick={navigateToEditPage} label={user?.name} color='info' variant='outlined' />
+                <Grid item container spacing={3}>
+                    <Grid item>
+                        <Chip icon={<FaceIcon />} onClick={navigateToEditPage} label={user?.name} color='info' variant='outlined' />
+                    </Grid>
+                    <Grid item>
+                        <Chip icon={<ExitToAppIcon />} onClick={signOut} label='Выйти' color='info' variant='outlined' />
+                    </Grid>
                 </Grid>
             </Grid>
         </div>
