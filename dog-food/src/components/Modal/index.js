@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import ModalContext from '../../contexts/modalContext';
+import GlobalContext from '../../contexts/globalContext';
 
 const style = {
     position: 'absolute',
@@ -19,26 +19,26 @@ const style = {
 };
 
 export default function CustomModal() {
-    const { modalState, setModalState } = useContext(ModalContext);
+    const { complicatedState, dispatch } = useContext(GlobalContext);
 
-    const handleOpen = () =>
-        setModalState(() => {
-            return { isOpen: true, msg: 'YRA YRA' };
-        });
-    const handleClose = () =>
-        setModalState(() => {
-            return { isOpen: false, msg: null };
-        });
+    const handleOpen = () => dispatch({ type: 'open modal', payload: 'YRA YRA' })
+    // setModalState(() => {
+    //     return { isOpen: true, msg: 'YRA YRA' };
+    // });
+    const handleClose = () => dispatch({ type: 'close modal'})
+    // setModalState(() => {
+    //     return { isOpen: false, msg: null };
+    // });
 
     return (
         <Modal
-            open={modalState.isOpen}
+            open={complicatedState?.modalState.isOpen}
             onClose={handleClose}
             aria-labelledby='modal-modal-title'
             aria-describedby='modal-modal-description'>
             <Box sx={style}>
                 <Typography id='modal-modal-title' variant='h6' component='h2'>
-                    {modalState.msg}
+                    {complicatedState?.modalState.msg}
                 </Typography>
             </Box>
         </Modal>

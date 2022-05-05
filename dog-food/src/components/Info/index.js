@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import UserContext from '../../contexts/userContext';
+import GlobalContext from '../../contexts/globalContext';
 
 import { Grid, IconButton, Chip } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -13,7 +13,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 export const Info = ({ basket, favorites }) => {
     const navigate = useNavigate();
 
-    const { user } = useContext(UserContext);
+    const { user } = useContext(GlobalContext);
 
     const navigateToCreatePage = () => {
         navigate('product/create');

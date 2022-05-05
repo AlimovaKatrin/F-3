@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import api from '../../utils/api';
 
-import UserContext from '../../contexts/userContext';
+import GlobalContext from '../../contexts/globalContext';
 
 import { Grid, Typography, TextField, Button } from '@mui/material';
 
 export const EditUser = () => {
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser, dispatch } = useContext(GlobalContext);
 
     const [userName, setUserName] = useState('');
     const [userAbout, setUserAbout] = useState('');
@@ -14,11 +14,12 @@ export const EditUser = () => {
     const handleClick = () => {
         api.editCurentUser({ name: userName, about: userAbout })
             .then((data) => {
+                dispatch({ type: 'edit user', payload: data })
                 setUser(data);
             })
             .catch((err) => alert(err));
     };
-    
+
     useEffect(() => {
         // if (user) {
         //     setUserName(user.name);

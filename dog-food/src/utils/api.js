@@ -94,6 +94,17 @@ class Api {
             body: JSON.stringify(updatedUserInfo),
         }).then(onResponce);
     }
+
+    editAvatarUser(updateAvatar) {
+        return fetch(`${this._url}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: {
+                authorization: `Bearer ${this._token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateAvatar),
+        }).then(onResponce);
+    }
 }
 
 export default new Api(config);

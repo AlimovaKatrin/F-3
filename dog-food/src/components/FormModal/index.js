@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
-import FormModalContext from '../../contexts/formModalContext';
-import UserContext from '../../contexts/userContext';
+// import FormModalContext from '../../contexts/formModalContext';
+import GlobalContext from '../../contexts/globalContext';
 
 import { useApi } from '../../hooks/useApi';
 
@@ -21,8 +21,8 @@ const style = {
 };
 
 export const FormModal = () => {
-    const { modalFormState, setModalFormState } = useContext(FormModalContext);
-    const { setUser } = useContext(UserContext);
+    // const { modalFormState, setModalFormState } = useContext(FormModalContext);
+    const { setUser, modalFormState, setModalFormState } = useContext(GlobalContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

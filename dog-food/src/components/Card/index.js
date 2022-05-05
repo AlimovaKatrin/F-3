@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import api from '../../utils/api';
 import './index.css';
-import ModalContext from '../../contexts/modalContext';
+import GlobalContext from '../../contexts/globalContext';
 
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
@@ -18,17 +18,19 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 export const Card = ({ itemFood, isInBasket, setBasket, isInFavorites, setFavorites }) => {
-    const { setModalState } = useContext(ModalContext);
+    const { dispatch } = useContext(GlobalContext);
     const { writeLS, removeLS } = useLocalStorage();
 
     const addItem = () => {
         writeLS('basket', itemFood._id);
         setBasket((prevState) => [...prevState, itemFood._id]);
+        dispatch({ type: 'open modal', payload: `${itemFood.name} добавлен в корзину` })
     };
 
     const removeItem = () => {
         removeLS('basket', itemFood._id);
         setBasket((prevState) => prevState.filter((itemID) => itemFood._id !== itemID));
+        dispatch({ type: 'open modal', payload: `${itemFood.name} удален из корзины` })
     };
 
     const addFavorite = () => {
@@ -36,14 +38,17 @@ export const Card = ({ itemFood, isInBasket, setBasket, isInFavorites, setFavori
         setFavorites((prevState) => [...prevState, itemFood._id]);
         api.addLike(itemFood._id)
             .then((addedItem) => {
-                setModalState(() => {
-                    return { isOpen: true, msg: `${addedItem.name} добавлен в избраное` };
-                });
+                dispatch({ type: 'open modal', payload: `${addedItem.name} добавлен в избраное` })
+                // setModalState(() => {
+                //     return { isOpen: true, msg: `${addedItem.name} добавлен в избраное` };
+                // });
             })
             .catch(() => {
-                setModalState(() => {
-                    return { isOpen: true, msg: `Не удалось добавить ${itemFood.name}` };
-                });
+                dispatch({ type: 'open modal', payload: `Не удалось добавить ${itemFood.name}` })
+
+                // setModalState(() => {
+                //     return { isOpen: true, msg: `Не удалось добавить ${itemFood.name}` };
+                // });
             });
     };
 
@@ -52,14 +57,18 @@ export const Card = ({ itemFood, isInBasket, setBasket, isInFavorites, setFavori
         setFavorites((prevState) => prevState.filter((itemID) => itemFood._id !== itemID));
         api.deleteLike(itemFood._id)
             .then((removedItem) => {
-                setModalState(() => {
-                    return { isOpen: true, msg: `${removedItem.name} удален из избраного` };
-                });
+                dispatch({ type: 'open modal', payload: `${removedItem.name} удален из избраного` })
+
+                // setModalState(() => {
+                //     return { isOpen: true, msg: `${removedItem.name} удален из избраного` };
+                // });
             })
             .catch(() => {
-                setModalState(() => {
-                    return { isOpen: true, msg: `Не удалось удалить ${itemFood.name}` };
-                });
+                dispatch({ type: 'open modal', payload: `Не удалось удалить ${itemFood.name}` })
+
+                // setModalState(() => {
+                //     return { isOpen: true, msg: `Не удалось удалить ${itemFood.name}` };
+                // });
             });
     };
 
